@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import io.github.imperialpinetrees.heaventimemassacre.Player;
 import io.github.imperialpinetrees.heaventimemassacre.util.MapManager;
 
 public class GameScreen implements Screen {
@@ -16,6 +17,8 @@ public class GameScreen implements Screen {
     private static final String TAG = GameScreen.class.getCanonicalName();
 
     private final Game game;
+
+    private Player player;
 
     // Using ShapeRenderer for now until we get art
     private ShapeRenderer shapeRenderer;
@@ -39,6 +42,7 @@ public class GameScreen implements Screen {
         viewport = new ExtendViewport(width, height);
         viewport.apply(true);
         camera = new OrthographicCamera();
+        player = new Player(20, 20);
 
         //camera.zoom = .5f;
         camera.setToOrtho(false, width, height);
@@ -51,7 +55,13 @@ public class GameScreen implements Screen {
         camera.position.set(MapManager.mapDimensions.x, MapManager.mapDimensions.y, 0f);
         camera.update();
 
+        shapeRenderer.setProjectionMatrix(camera.projection);
+        shapeRenderer.setTransformMatrix(camera.view);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        player.renderPlayer(shapeRenderer);
+
         map.renderMap(camera);
+        shapeRenderer.end();
     }
 
     @Override
