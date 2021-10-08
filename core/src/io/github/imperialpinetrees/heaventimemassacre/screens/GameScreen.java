@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import io.github.imperialpinetrees.heaventimemassacre.util.MapManager;
 
 public class GameScreen implements Screen {
 
@@ -21,12 +22,15 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     private Viewport viewport;
 
+    private MapManager map;
+
     private static final float width = Gdx.graphics.getWidth();
     private static final float height = Gdx.graphics.getHeight();
 
 
     public GameScreen(Game game) {
         this.game = game;
+        map = new MapManager();
     }
 
     @Override
@@ -36,14 +40,18 @@ public class GameScreen implements Screen {
         viewport.apply(true);
         camera = new OrthographicCamera();
 
+        //camera.zoom = .5f;
         camera.setToOrtho(false, width, height);
-        
+        map.loadMap("untitled.tmx");
     }
 
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Color.BLACK);
+        camera.position.set(MapManager.mapDimensions.x, MapManager.mapDimensions.y, 0f);
+        camera.update();
 
+        map.renderMap(camera);
     }
 
     @Override
