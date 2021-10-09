@@ -35,4 +35,8 @@ public class Player {
             playerRectangle.x = playerCoords.x;
         }
     }
+
+    public void dispose() {
+
+    }
 }
