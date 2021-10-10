@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.imperialpinetrees.heaventimemassacre.Player;
+import io.github.imperialpinetrees.heaventimemassacre.enums.GameState;
 import io.github.imperialpinetrees.heaventimemassacre.util.MapManager;
 
 public class GameScreen implements Screen {
@@ -19,6 +20,8 @@ public class GameScreen implements Screen {
     private final Game game;
 
     private Player player;
+
+    private GameState gameState;
 
     // Using ShapeRenderer for now until we get art
     private ShapeRenderer shapeRenderer;
@@ -42,11 +45,12 @@ public class GameScreen implements Screen {
         viewport = new ExtendViewport(width, height);
         viewport.apply(true);
         camera = new OrthographicCamera();
+        map.loadMap("untitled.tmx");
         player = new Player(20, 20);
 
-        //camera.zoom = .5f;
         camera.setToOrtho(false, width, height);
-        map.loadMap("untitled.tmx");
+
+        gameState = GameState.PLAY;
     }
 
     @Override
@@ -71,12 +75,12 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
-
+        gameState = GameState.PAUSE;
     }
 
     @Override
     public void resume() {
-
+        gameState = GameState.PLAY;
     }
 
     @Override
