@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import io.github.imperialpinetrees.heaventimemassacre.util.MapManager;
 
 public class Player {
 
@@ -18,6 +19,8 @@ public class Player {
         playerCoords = new Vector2(x, y);
         playerRectangle = new Rectangle(playerCoords.x, playerCoords.y, 16, 32);
         velocity = new Vector2(2, 2);
+        MapManager.setPlayerSpawnLocation();
+        playerCoords.set(MapManager.playerStartPos.x, MapManager.playerStartPos.y);
     }
 
     public void renderPlayer(ShapeRenderer shapeRenderer) {
@@ -34,6 +37,22 @@ public class Player {
             playerCoords.x -= velocity.x;
             playerRectangle.x = playerCoords.x;
         }
+    }
+
+    public static float getXPos() {
+        return playerCoords.x;
+    }
+
+    public static void setXPos(float x) {
+        playerCoords.x = x;
+    }
+
+    public static float getYPos() {
+        return playerCoords.y;
+    }
+
+    public static void setYPos(float y) {
+        playerCoords.y = y;
     }
 
     public void dispose() {
