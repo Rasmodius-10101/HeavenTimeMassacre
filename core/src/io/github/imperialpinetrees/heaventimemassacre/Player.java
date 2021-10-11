@@ -16,11 +16,11 @@ public class Player {
     private static Vector2 playerCoords;
 
     public Player(int x, int y) {
-        playerCoords = new Vector2(x, y);
-        playerRectangle = new Rectangle(playerCoords.x, playerCoords.y, 16, 32);
-        velocity = new Vector2(2, 2);
+        playerCoords = new Vector2(0, 0);
         MapManager.setPlayerSpawnLocation();
         playerCoords.set(MapManager.playerStartPos.x, MapManager.playerStartPos.y);
+        playerRectangle = new Rectangle(playerCoords.x, playerCoords.y, 16, 32);
+        velocity = new Vector2(2, 2);
     }
 
     public void renderPlayer(ShapeRenderer shapeRenderer) {

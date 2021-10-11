@@ -33,6 +33,6 @@
   <object id="1" name="COLLISION" x="0.5" y="240" width="286" height="16"/>
  </objectgroup>
  <objectgroup id="3" name="SPAWN">
-  <object id="14" name="SPAWN" x="0.5" y="207.5" width="15.5" height="17"/>
+  <object id="14" name="SPAWN" x="1" y="222.5" width="15.5" height="17"/>
  </objectgroup>
 </map>
