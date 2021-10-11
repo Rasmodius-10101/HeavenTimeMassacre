@@ -46,7 +46,7 @@ public class GameScreen implements Screen {
         viewport.apply(true);
         camera = new OrthographicCamera();
         map.loadMap("untitled.tmx");
-        player = new Player(20, 20);
+        player = new Player();
 
         camera.setToOrtho(false, width, height);
 

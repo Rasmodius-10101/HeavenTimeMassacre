@@ -15,7 +15,13 @@ public class Player {
 
     private static Vector2 playerCoords;
 
-    public Player(int x, int y) {
+    public enum MovementDirection {
+        LEFT, RIGHT
+    }
+
+    MovementDirection movementDirection;
+
+    public Player() {
         playerCoords = new Vector2(0, 0);
         MapManager.setPlayerSpawnLocation();
         playerCoords.set(MapManager.playerStartPos.x, MapManager.playerStartPos.y);
@@ -32,10 +38,12 @@ public class Player {
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
              playerCoords.x += velocity.x;
              playerRectangle.x = playerCoords.x;
+             movementDirection = MovementDirection.RIGHT;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             playerCoords.x -= velocity.x;
             playerRectangle.x = playerCoords.x;
+            movementDirection = MovementDirection.LEFT;
         }
     }
 
