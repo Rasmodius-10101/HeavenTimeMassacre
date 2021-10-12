@@ -39,6 +39,20 @@ public class GameScreen implements Screen {
         map = new MapManager();
     }
 
+
+
+    public void stopPlayerLeaving(){
+        if(player.getYPos() < 10){
+            player.setPosition(player.getXPos(), 16);
+        }
+        if(player.getXPos() < 10){
+            player.setPosition(10, player.getYPos());
+        }
+        if (player.getXPos()+ player.getWIDTH()> map.getMapDimensions().x){
+            player.setPosition(map.getMapDimensions().x - player.getWIDTH(), player.getYPos());
+        }
+    }
+
     @Override
     public void show() {
         shapeRenderer = new ShapeRenderer();
@@ -66,11 +80,15 @@ public class GameScreen implements Screen {
 
         map.renderMap(camera);
         shapeRenderer.end();
+
+        stopPlayerLeaving();
     }
+
+
 
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width,height);
     }
 
     @Override

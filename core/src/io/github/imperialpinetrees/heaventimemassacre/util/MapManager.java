@@ -49,4 +49,11 @@ public class MapManager {
         }
     }
 
+    public static Vector2 getMapDimensions() {
+        return mapDimensions;
+    }
+
+    public static void setMapDimensions(Vector2 mapDimensions) {
+        MapManager.mapDimensions = mapDimensions;
+    }
 }
