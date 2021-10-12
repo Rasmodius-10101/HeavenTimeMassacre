@@ -13,6 +13,9 @@ import io.github.imperialpinetrees.heaventimemassacre.Player;
 import io.github.imperialpinetrees.heaventimemassacre.enums.GameState;
 import io.github.imperialpinetrees.heaventimemassacre.util.MapManager;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class GameScreen implements Screen {
 
     private static final String TAG = GameScreen.class.getCanonicalName();
@@ -22,6 +25,8 @@ public class GameScreen implements Screen {
     private Player player;
 
     private GameState gameState;
+
+
 
     // Using ShapeRenderer for now until we get art
     private ShapeRenderer shapeRenderer;
@@ -40,8 +45,18 @@ public class GameScreen implements Screen {
     }
 
 
-
     public void stopPlayerLeaving(){
+        /*if(player.getCollisionRectangle().overlaps(map.getCollisionLayer().){
+            player.setPosition(player.getXPos(), 18);
+            player.landed();
+        }
+        if(player.getXPos() < 2){
+            player.setPosition(2, player.getYPos());
+        }
+        if (player.getXPos()+ player.getWIDTH()> map.getMapDimensions().x){
+            player.setPosition(map.getMapDimensions().x - player.getWIDTH(), player.getYPos());
+        }*/
+
         if(player.getYPos() < 18){
             player.setPosition(player.getXPos(), 18);
             player.landed();
@@ -83,6 +98,7 @@ public class GameScreen implements Screen {
         shapeRenderer.end();
 
         stopPlayerLeaving();
+
 
 
     }

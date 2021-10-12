@@ -48,7 +48,7 @@ public class Player {
 
     public void renderPlayer(ShapeRenderer shapeRenderer) {
         shapeRenderer.rect(playerRectangle.x, playerRectangle.y, playerRectangle.width, playerRectangle.height);
-        getPlayerMovement();
+        playerUpdate();
     }
 
     public void landed(){
@@ -125,6 +125,10 @@ public class Player {
 
     public void setHEIGHT(int HEIGHT) {
         this.HEIGHT = HEIGHT;
+    }
+
+    public Rectangle getCollisionRectangle() {
+        return collisionRectangle;
     }
 
     //dispose
