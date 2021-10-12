@@ -19,6 +19,9 @@ public class Player {
     private static Vector2 playerCoords;
 
     private int WIDTH = 16, HEIGHT = 32;
+    private boolean jumpBlock = false;
+    private float jumpDistance = 0;
+    private final float MAX_JUMP = 3*HEIGHT;
 
     private final Rectangle collisionRectangle = new Rectangle(0, 0,
             WIDTH, HEIGHT);
@@ -48,6 +51,12 @@ public class Player {
         getPlayerMovement();
     }
 
+    public void landed(){
+        jumpBlock = false;
+        jumpDistance = 16;
+
+    }
+
     public void getPlayerMovement() {
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)||Gdx.input.isKeyPressed(Input.Keys.D)) {
              playerCoords.x += velocity.x;
@@ -58,6 +67,18 @@ public class Player {
             playerCoords.x -= velocity.x;
             playerRectangle.x = playerCoords.x;
             movementDirection = MovementDirection.LEFT;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) && !jumpBlock){
+            playerCoords.y += velocity.y;
+            playerRectangle.y = playerCoords.y;
+            movementDirection = MovementDirection.UP;
+            jumpDistance += playerCoords.y;
+            jumpBlock = jumpDistance >= MAX_JUMP;
+        }else {
+            playerCoords.y -= velocity.y;
+            playerRectangle.y = playerCoords.y;
+            movementDirection = MovementDirection.DOWN;
+            jumpBlock = jumpDistance >= 0;
         }
     }
 
