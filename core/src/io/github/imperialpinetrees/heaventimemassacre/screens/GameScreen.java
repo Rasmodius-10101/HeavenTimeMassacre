@@ -57,7 +57,7 @@ public class GameScreen implements Screen {
             player.setPosition(map.getMapDimensions().x - player.getWIDTH(), player.getYPos());
         }*/
 
-        if(player.getYPos() < 18){
+        /*if(player.getYPos() < 18){
             player.setPosition(player.getXPos(), 18);
             player.landed();
         }
@@ -66,7 +66,7 @@ public class GameScreen implements Screen {
         }
         if (player.getXPos()+ player.getWIDTH()> map.getMapDimensions().x){
             player.setPosition(map.getMapDimensions().x - player.getWIDTH(), player.getYPos());
-        }
+        }*/
     }
 
     @Override
@@ -100,6 +100,7 @@ public class GameScreen implements Screen {
         stopPlayerLeaving();
 
 
+        MapManager.checkCollision();
 
     }
 

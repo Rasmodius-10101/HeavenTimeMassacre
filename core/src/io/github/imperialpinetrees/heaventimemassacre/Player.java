@@ -18,12 +18,12 @@ public class Player {
 
     private static Vector2 playerCoords;
 
-    private int WIDTH = 16, HEIGHT = 32;
-    private boolean jumpBlock = false;
-    private float jumpDistance = 0;
+    private static int WIDTH = 16, HEIGHT = 32;
+    private static boolean jumpBlock = false;
+    private static float jumpDistance = 0;
     private final float MAX_JUMP = 3*HEIGHT;
 
-    private final Rectangle collisionRectangle = new Rectangle(0, 0,
+    private static final Rectangle collisionRectangle = new Rectangle(0, 0,
             WIDTH, HEIGHT);
 
     public enum MovementDirection {
@@ -51,7 +51,7 @@ public class Player {
         playerUpdate();
     }
 
-    public void landed(){
+    public static void landed(){
         jumpBlock = false;
         jumpDistance = 16;
 
@@ -83,13 +83,13 @@ public class Player {
     }
 
     //collision
-    private void updateCollisionRectangle(){
+    private static void updateCollisionRectangle(){
         collisionRectangle.setPosition(playerCoords.x, playerCoords.y);
     }
 
-    public void setPosition(float x, float y){
-        this.playerCoords.x = x;
-        this.playerCoords.y = y;
+    public static void setPosition(float x, float y){
+        playerCoords.x = x;
+        playerCoords.y = y;
 
         updateCollisionRectangle();
     }
@@ -127,7 +127,7 @@ public class Player {
         this.HEIGHT = HEIGHT;
     }
 
-    public Rectangle getCollisionRectangle() {
+    public static Rectangle getCollisionRectangle() {
         return collisionRectangle;
     }
 

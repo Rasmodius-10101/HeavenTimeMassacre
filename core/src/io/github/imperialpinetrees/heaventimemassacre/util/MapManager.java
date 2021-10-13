@@ -11,31 +11,39 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import io.github.imperialpinetrees.heaventimemassacre.Player;
 
 public class MapManager {
 
-    public static final float unitScale = 1/16f;
-
+    //I don't know
     public static TiledMap tiledMap;
     private TiledMapRenderer tiledMapRenderer;
 
+    //layers
     private static MapLayer spawnLayer;
     public static MapLayer collisionLayer;
+    public static final float unitScale = 1/16f;
 
-
+    //variables
     public static Vector2 mapDimensions;
     public static Vector2 playerStartPos;
 
+    //Arrays
     public static Array<Rectangle> collisionArray;
+
+    //Other Classes
+    private static Player player;
 
     public MapManager() {
         mapDimensions = new Vector2(280 / 2, 250 / 2);
         playerStartPos = new Vector2(0,0);
+
     }
 
     public void loadMap(String mapName) { //TODO: Fix the method to make it safer in terms of errors
         tiledMap = new TmxMapLoader().load(mapName);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        setCollision();
     }
 
     public void renderMap(OrthographicCamera camera) {
@@ -52,17 +60,30 @@ public class MapManager {
             }
         }
 
+    }
+
+    public static void setCollision(){
         collisionLayer = tiledMap.getLayers().get("COLLISION");
+        collisionArray = new Array<Rectangle>();
         for (MapObject object : collisionLayer.getObjects()) {
             if (object.getName().equalsIgnoreCase("COLLISION")) {
                 collisionArray.add(((RectangleMapObject)object).getRectangle());
             }
-            if (object.getName().equalsIgnoreCase("COLLISION2")) {
-                collisionArray.add(((RectangleMapObject)object).getRectangle());
+        }
+    }
+
+    public static void checkCollision(){
+
+        for (Rectangle e : collisionArray){
+            if (Player.getCollisionRectangle().overlaps(e)) {
+                Player.setPosition(Player.getXPos(), e.height);
+                Player.landed();
+            }
+
+            if (Player.getXPos() < 2) {
+                Player.setPosition(2, Player.getYPos());
             }
         }
-
-
     }
 
 
