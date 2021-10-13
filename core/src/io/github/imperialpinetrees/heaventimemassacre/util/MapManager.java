@@ -75,6 +75,7 @@ public class MapManager {
     public static void checkCollision(){
 
         for (Rectangle e : collisionArray){
+           // if(Player.getCollisionRectangle().y+Player.getCollisionRectangle().height > e.y && Player.getCollisionRectangle().x )
             if (Player.getCollisionRectangle().overlaps(e)) {
                 Player.setPosition(Player.getXPos(), e.height + Player.getGravity() - 1);
                 Player.landed();
