@@ -1,4 +1,4 @@
-package io.github.imperialpinetrees.heaventimemassacre;
+package io.github.imperialpinetrees.heaventimemassacre.Entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -14,16 +14,18 @@ public class Player {
     private float x = 0;
     private float y = 0;
 
-    private Vector2 velocity;
+    private MapManager map = new MapManager();
 
+    private Vector2 velocity;
     private static Vector2 playerCoords;
+    public static float gravity = 1;
 
     private static int WIDTH = 16, HEIGHT = 32;
     private static boolean jumpBlock = false;
     private static float jumpDistance = 0;
     private final float MAX_JUMP = 3*HEIGHT;
 
-    private static final Rectangle collisionRectangle = new Rectangle(0, 0,
+    private static final Rectangle collisionRectangle = new Rectangle(MapManager.playerStartPos.x, MapManager.playerStartPos.y,
             WIDTH, HEIGHT);
 
     public enum MovementDirection {
@@ -37,7 +39,7 @@ public class Player {
         MapManager.setPlayerSpawnLocation();
         playerCoords.set(MapManager.playerStartPos.x, MapManager.playerStartPos.y);
         playerRectangle = new Rectangle(playerCoords.x, playerCoords.y, WIDTH, HEIGHT);
-        velocity = new Vector2(2, 2);
+        velocity = new Vector2(2, 20);
 
     }
 
@@ -75,7 +77,10 @@ public class Player {
             jumpDistance += playerCoords.y;
             jumpBlock = jumpDistance >= MAX_JUMP;
         }else {
-            playerCoords.y -= velocity.y;
+            for (Rectangle e : map.getCollisionArray()){
+
+            }
+            playerCoords.y -= getGravity();
             playerRectangle.y = playerCoords.y;
             movementDirection = MovementDirection.DOWN;
             jumpBlock = jumpDistance >= 0;
@@ -129,6 +134,10 @@ public class Player {
 
     public static Rectangle getCollisionRectangle() {
         return collisionRectangle;
+    }
+
+    public static float getGravity() {
+        return gravity;
     }
 
     //dispose

@@ -11,7 +11,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import io.github.imperialpinetrees.heaventimemassacre.Player;
+import io.github.imperialpinetrees.heaventimemassacre.Entities.Player;
 
 public class MapManager {
 
@@ -76,7 +76,7 @@ public class MapManager {
 
         for (Rectangle e : collisionArray){
             if (Player.getCollisionRectangle().overlaps(e)) {
-                Player.setPosition(Player.getXPos(), e.height);
+                Player.setPosition(Player.getXPos(), e.height + Player.getGravity() - 1);
                 Player.landed();
             }
 
@@ -108,4 +108,6 @@ public class MapManager {
     public static MapLayer getCollisionLayer() {
         return collisionLayer;
     }
+
+
 }

@@ -31,9 +31,8 @@
  </layer>
  <objectgroup id="2" name="COLLISION">
   <object id="1" name="COLLISION" x="0.5" y="240" width="286" height="16"/>
-  <object id="25" name="COLLISION" x="160.934" y="177.314" width="126.126" height="14.3325"/>
  </objectgroup>
  <objectgroup id="3" name="SPAWN">
-  <object id="14" name="SPAWN" x="1" y="222.5" width="15.5" height="17"/>
+  <object id="14" name="SPAWN" x="1.55093" y="205.972" width="15.5" height="17"/>
  </objectgroup>
 </map>
