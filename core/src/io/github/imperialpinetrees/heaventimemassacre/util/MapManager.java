@@ -29,10 +29,10 @@ public class MapManager {
     public static Vector2 playerStartPos;
 
     //Arrays
-    public static Array<Rectangle> collisionArray;
+
 
     //Other Classes
-    private static Player player;
+
 
     public MapManager() {
         mapDimensions = new Vector2(280 / 2, 250 / 2);
@@ -43,7 +43,6 @@ public class MapManager {
     public void loadMap(String mapName) { //TODO: Fix the method to make it safer in terms of errors
         tiledMap = new TmxMapLoader().load(mapName);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-        setCollision();
     }
 
     public void renderMap(OrthographicCamera camera) {
@@ -62,31 +61,6 @@ public class MapManager {
 
     }
 
-    public static void setCollision(){
-        collisionLayer = tiledMap.getLayers().get("COLLISION");
-        collisionArray = new Array<Rectangle>();
-        for (MapObject object : collisionLayer.getObjects()) {
-            if (object.getName().equalsIgnoreCase("COLLISION")) {
-                collisionArray.add(((RectangleMapObject)object).getRectangle());
-            }
-        }
-    }
-
-    public static void checkCollision(){
-
-        for (Rectangle e : collisionArray){
-           // if(Player.getCollisionRectangle().y+Player.getCollisionRectangle().height > e.y && Player.getCollisionRectangle().x )
-            if (Player.getCollisionRectangle().overlaps(e)) {
-                Player.setPosition(Player.getXPos(), e.height + Player.getGravity() - 1);
-                Player.landed();
-            }
-
-            if (Player.getXPos() < 2) {
-                Player.setPosition(2, Player.getYPos());
-            }
-        }
-    }
-
 
 
 
@@ -98,17 +72,8 @@ public class MapManager {
         MapManager.mapDimensions = mapDimensions;
     }
 
-    public static Array<Rectangle> getCollisionArray() {
-        return collisionArray;
-    }
 
-    public static void setCollisionArray(Array<Rectangle> collisionArray) {
-        MapManager.collisionArray = collisionArray;
-    }
 
-    public static MapLayer getCollisionLayer() {
-        return collisionLayer;
-    }
 
 
 }

@@ -42,30 +42,6 @@ public class GameScreen implements Screen {
     }
 
 
-    public void stopPlayerLeaving(){
-        /*if(player.getCollisionRectangle().overlaps(map.getCollisionLayer().){
-            player.setPosition(player.getXPos(), 18);
-            player.landed();
-        }
-        if(player.getXPos() < 2){
-            player.setPosition(2, player.getYPos());
-        }
-        if (player.getXPos()+ player.getWIDTH()> map.getMapDimensions().x){
-            player.setPosition(map.getMapDimensions().x - player.getWIDTH(), player.getYPos());
-        }*/
-
-        /*if(player.getYPos() < 18){
-            player.setPosition(player.getXPos(), 18);
-            player.landed();
-        }
-        if(player.getXPos() < 2){
-            player.setPosition(2, player.getYPos());
-        }
-        if (player.getXPos()+ player.getWIDTH()> map.getMapDimensions().x){
-            player.setPosition(map.getMapDimensions().x - player.getWIDTH(), player.getYPos());
-        }*/
-    }
-
     @Override
     public void show() {
         shapeRenderer = new ShapeRenderer();
@@ -89,15 +65,13 @@ public class GameScreen implements Screen {
         shapeRenderer.setProjectionMatrix(camera.projection);
         shapeRenderer.setTransformMatrix(camera.view);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        player.renderPlayer(shapeRenderer);
+        player.renderPlayer(shapeRenderer, delta);
 
         map.renderMap(camera);
         shapeRenderer.end();
 
-        stopPlayerLeaving();
 
 
-        MapManager.checkCollision();
 
     }
 
