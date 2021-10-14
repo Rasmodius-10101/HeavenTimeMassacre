@@ -6,6 +6,9 @@
    <image width="16" height="16" source="Raw Assets/Tilesets/temp_bg.png"/>
   </tile>
   <tile id="1">
+   <properties>
+    <property name="Solid" type="bool" value="false"/>
+   </properties>
    <image width="16" height="16" source="Raw Assets/Tilesets/temp_floor.png"/>
   </tile>
  </tileset>
@@ -29,16 +32,6 @@
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
 </data>
  </layer>
- <objectgroup id="2" name="COLLISION">
-  <object id="1" name="COLLISION" x="0.5" y="240" width="286" height="16"/>
-  <object id="26" name="collision" x="0.242577" y="0.727731" width="15.2824" height="255.191"/>
-  <object id="27" name="Collision" x="272.327" y="0.800961" width="15.2183" height="254.973"/>
-  <object id="28" name="Collision" x="160.477" y="176.549" width="127.59" height="14.8361"/>
-  <object id="30" name="collision" x="192.455" y="0.404318" width="88.1413" height="31.3347"/>
-  <object id="31" name="collision" x="12.6717" y="1.33387" width="185.407" height="13.3387"/>
-  <object id="32" name="Collision" x="80.5026" y="64.4976" width="111.557" height="15.5272"/>
-  <object id="33" name="Collision" x="10.2959" y="127.511" width="101.903" height="16.8959"/>
- </objectgroup>
  <objectgroup id="3" name="SPAWN">
   <object id="14" name="SPAWN" x="22.8843" y="206.861" width="15.5" height="17"/>
  </objectgroup>
