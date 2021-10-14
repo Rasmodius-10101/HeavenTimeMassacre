@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import io.github.imperialpinetrees.heaventimemassacre.Entities.Player;
+import io.github.imperialpinetrees.heaventimemassacre.entities.Player;
 import io.github.imperialpinetrees.heaventimemassacre.enums.GameState;
 import io.github.imperialpinetrees.heaventimemassacre.util.MapManager;
 

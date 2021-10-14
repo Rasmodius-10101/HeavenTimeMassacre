@@ -1,9 +1,8 @@
-package io.github.imperialpinetrees.heaventimemassacre.Entities;
+package io.github.imperialpinetrees.heaventimemassacre.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import io.github.imperialpinetrees.heaventimemassacre.util.MapManager;
@@ -16,7 +15,7 @@ public class Player {
     private float y = 0;
 
     private MapManager map = new MapManager();
-    private TiledMapTileLayer collisonLayers = new TiledMapTileLayer();
+    // private TiledMapTileLayer collisonLayers = new TiledMapTileLayer();
 
     private Vector2 velocity;
     private static Vector2 playerCoords;
