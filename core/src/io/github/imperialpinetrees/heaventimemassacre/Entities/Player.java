@@ -16,14 +16,14 @@ public class Player {
     private float y = 0;
 
     private MapManager map = new MapManager();
-    private static TiledMapTileLayer layer;
+    private static TiledMapTileLayer layer = new TiledMapTileLayer(16,16, 16, 16);
 
 
     private Vector2 velocity;
     private static Vector2 playerCoords;
     public static float gravity = 10;
 
-    private static int WIDTH = 16, HEIGHT = 16, tileWidth = layer.getTileWidth(), tileHieght = layer.getTileHeight();
+    private static int WIDTH = 16, HEIGHT = 16, tileWidth , tileHieght;
     private static boolean jumpBlock = false;
     private static float jumpDistance = 0;
     private final float MAX_JUMP = 10*HEIGHT;
@@ -70,54 +70,16 @@ public class Player {
     }
 
     public void getPlayerMovement(float deltatime) {
-        float oldX = playerCoords.x, oldY = playerCoords.y;
 
-        if (layer.getCell((int) (playerCoords.x / tileWidth),(int) (playerCoords.y + HEIGHT) / tileHieght).getTile().getProperties().containsKey("Solid")){
-            //top left
-            leftCollisonX = true;
-        }else if (layer.getCell((int) (playerCoords.x / tileWidth),(int) ((playerCoords.y + HEIGHT) /2) / tileHieght).getTile().getProperties().containsKey("Solid")){
-            //middle left
-            leftCollisonX = true;
-        }else if (layer.getCell((int) (playerCoords.x / tileWidth),(int) ((playerCoords.y + HEIGHT))).getTile().getProperties().containsKey("Solid")){
-            //bottom left
-            leftCollisonX = true;
-        }else {
-            leftCollisonX = false;
-        }
 
-        if (layer.getCell((int) (playerCoords.x + WIDTH)/tileWidth, (int) (playerCoords.y + HEIGHT) / tileHieght).getTile().getProperties().containsKey("Solid")){
-            //top right
-            rightCollisionX = true;
-        }else if (layer.getCell((int) (playerCoords.x + WIDTH)/ tileWidth, (int) (playerCoords.y+HEIGHT)/ tileHieght).getTile().getProperties().containsKey("Solid")){
-            //middle right
-            rightCollisionX = true;
-        }else if (layer.getCell((int) (playerCoords.x + WIDTH)/tileWidth, (int) playerCoords.y/ tileHieght).getTile().getProperties().containsKey("Solid")){
-            //bottom right
-            rightCollisionX = true;
-        }else {
-            rightCollisionX = false;
-        }
-
-        if (layer.getCell((int) ((playerCoords.x +WIDTH)/2)/tileWidth,(int) (playerCoords.y /2) / tileHieght).getTile().getProperties().containsKey("Solid")){
-            //bottom middle
-            downCollision= true;
-        }else {
-            downCollision = false;
-        }
-        if (layer.getCell((int) ((playerCoords.x +WIDTH)/2)/tileWidth,(int) ((playerCoords.y + HEIGHT) /2) / tileHieght).getTile().getProperties().containsKey("Solid")){
-            //up middle
-            upCollison = true;
-        }else {
-            upCollison = false;
-        }
 
         if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT)||Gdx.input.isKeyPressed(Input.Keys.D))) {
-            if (!rightCollisionX) {
+
                 playerCoords.x += velocity.x * deltatime;
                 playerRectangle.x = playerCoords.x;
                 movementDirection = MovementDirection.RIGHT;
                 aimDirection = AimDirection.AIM_RIGHT;
-            }
+
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)||Gdx.input.isKeyPressed(Input.Keys.A)) {
@@ -127,16 +89,16 @@ public class Player {
             aimDirection = AimDirection.AIM_LEFT;
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)/* && !jumpBlock*/){
-            if (!upCollison&& !jumpBlock) {
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)){
+
                 playerCoords.y += velocity.y * deltatime;
                 playerRectangle.y = playerCoords.y;
                 movementDirection = MovementDirection.UP;
                 jumpDistance += playerCoords.y;
                 jumpBlock = jumpDistance >= MAX_JUMP;
                 aimDirection = AimDirection.AIM_UP;
-            }
-        }else if(!downCollision){
+
+        }else {
             playerCoords.y += -getGravity() * deltatime;
             playerRectangle.y = playerCoords.y;
             movementDirection = MovementDirection.DOWN;
