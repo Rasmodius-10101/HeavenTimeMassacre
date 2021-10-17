@@ -63,6 +63,7 @@ public class MapManager {
     }
 
     private void getCollisionObjects() {
+        collisionArray = new Array<Rectangle>();
         for (MapObject e : tiledMap.getLayers().get("COLLISION").getObjects()) {
             collisionArray.add(((RectangleMapObject)e).getRectangle());
         }

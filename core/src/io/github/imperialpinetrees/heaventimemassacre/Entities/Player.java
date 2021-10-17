@@ -98,7 +98,11 @@ public class Player {
                 aimDirection = AimDirection.AIM_UP;
 
         }else {
-            playerCoords.y += -getGravity() * deltatime;
+            if (isPlayerOverlappingCollision()) {
+                playerCoords.y = playerCoords.y;
+            } else {
+                playerCoords.y += -getGravity() * deltatime;
+            }
             playerRectangle.y = playerCoords.y;
             movementDirection = MovementDirection.DOWN;
             /*jumpBlock = jumpDistance >= 0;*/
@@ -108,6 +112,15 @@ public class Player {
     //collision
     private static void updateCollisionRectangle(){
         collisionRectangle.setPosition(playerCoords.x, playerCoords.y);
+    }
+
+    private static boolean isPlayerOverlappingCollision() {
+        for (Rectangle collision : MapManager.getCollisionArray()) {
+            if (collisionRectangle.overlaps(collision)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void setPosition(float x, float y){
