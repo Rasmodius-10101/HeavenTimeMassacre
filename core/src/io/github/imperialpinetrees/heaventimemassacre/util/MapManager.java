@@ -29,6 +29,7 @@ public class MapManager {
     public static Vector2 playerStartPos;
 
     //Arrays
+    private static Array<Rectangle> collisionArray;
 
 
     //Other Classes
@@ -43,6 +44,7 @@ public class MapManager {
     public void loadMap(String mapName) { //TODO: Fix the method to make it safer in terms of errors
         tiledMap = new TmxMapLoader().load(mapName);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        getCollisionObjects();
     }
 
     public void renderMap(OrthographicCamera camera) {
@@ -58,22 +60,19 @@ public class MapManager {
                 ((RectangleMapObject)object).getRectangle().getPosition(playerStartPos);
             }
         }
-
     }
 
+    private void getCollisionObjects() {
+        for (MapObject e : tiledMap.getLayers().get("COLLISION").getObjects()) {
+            collisionArray.add(((RectangleMapObject)e).getRectangle());
+        }
+    }
 
-
+    public static Array<Rectangle> getCollisionArray() {
+        return collisionArray;
+    }
 
     public static Vector2 getMapDimensions() {
         return mapDimensions;
     }
-
-    public static void setMapDimensions(Vector2 mapDimensions) {
-        MapManager.mapDimensions = mapDimensions;
-    }
-
-
-
-
-
 }

@@ -90,7 +90,6 @@ public class Player {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-
                 playerCoords.y += velocity.y * deltatime;
                 playerRectangle.y = playerCoords.y;
                 movementDirection = MovementDirection.UP;
