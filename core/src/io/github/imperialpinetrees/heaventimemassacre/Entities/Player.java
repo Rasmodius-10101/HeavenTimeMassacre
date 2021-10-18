@@ -21,7 +21,7 @@ public class Player {
 
     private Vector2 velocity;
     private static Vector2 playerCoords;
-    public static float gravity = 10;
+    public static float gravity = 50;
 
     private static int WIDTH = 16, HEIGHT = 16, tileWidth , tileHieght;
     private static boolean jumpBlock = false;
@@ -69,13 +69,67 @@ public class Player {
 
     }
 
-    public void getPlayerMovement(float deltatime) {
+    public void getPlayerMovement(float deltaTime) {
+        for (Rectangle e : MapManager.getCollisionArray()) {
+            if (collisionRectangle.overlaps(e)) {
+                if (collisionRectangle.x >= e.x) {
+                    playerCoords.y += 1;
+                } else if (collisionRectangle.y >= e.y) {
+                    playerCoords.x += 1;
+                }
+            }
+        }
+        if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT)||Gdx.input.isKeyPressed(Input.Keys.D))) {
+            playerCoords.x += velocity.x * deltaTime;
+            playerRectangle.x = playerCoords.x;
+            movementDirection = MovementDirection.RIGHT;
+            aimDirection = AimDirection.AIM_RIGHT;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)||Gdx.input.isKeyPressed(Input.Keys.A)) {
+            playerCoords.x -= velocity.x * deltaTime;
+            playerRectangle.x = playerCoords.x;
+            movementDirection = MovementDirection.LEFT;
+            aimDirection = AimDirection.AIM_LEFT;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)){
+            if (isPlayerOverlappingCollisionY()) {
+
+            } else {
+                playerCoords.y += velocity.y * deltaTime;
+                playerRectangle.y = playerCoords.y;
+                movementDirection = MovementDirection.UP;
+                jumpDistance += playerCoords.y;
+                jumpBlock = jumpDistance >= MAX_JUMP;
+                aimDirection = AimDirection.AIM_UP;
+            }
+
+        }else {
+            if (isPlayerOverlappingCollisionY()) {
+                playerCoords.y = playerCoords.y;
+            } else {
+                playerCoords.y += -getGravity() * deltaTime;
+            }
+            playerRectangle.y = playerCoords.y;
+            movementDirection = MovementDirection.DOWN;
+            /*jumpBlock = jumpDistance >= 0;*/
+        }
+
+    }
+
+    public void getPlayerMovementOld(float deltatime) {
 
 
 
         if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT)||Gdx.input.isKeyPressed(Input.Keys.D))) {
 
-                playerCoords.x += velocity.x * deltatime;
+                if (!isPlayerOverlappingCollisionX()) {
+                    playerCoords.x += velocity.x * deltatime;
+                }
+                else {
+
+                }
                 playerRectangle.x = playerCoords.x;
                 movementDirection = MovementDirection.RIGHT;
                 aimDirection = AimDirection.AIM_RIGHT;
@@ -83,23 +137,35 @@ public class Player {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)||Gdx.input.isKeyPressed(Input.Keys.A)) {
-            playerCoords.x += -velocity.x* deltatime;
+            if (!isPlayerOverlappingCollisionX()) {
+                playerCoords.x -= velocity.x * deltatime;
+            }
+            else {
+                playerCoords.x = playerCoords.x;
+            }
             playerRectangle.x = playerCoords.x;
             movementDirection = MovementDirection.LEFT;
             aimDirection = AimDirection.AIM_LEFT;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)){
+            if (isPlayerOverlappingCollisionY()) {
 
+            } else {
                 playerCoords.y += velocity.y * deltatime;
                 playerRectangle.y = playerCoords.y;
                 movementDirection = MovementDirection.UP;
                 jumpDistance += playerCoords.y;
                 jumpBlock = jumpDistance >= MAX_JUMP;
                 aimDirection = AimDirection.AIM_UP;
+            }
 
         }else {
-            playerCoords.y += -getGravity() * deltatime;
+            if (isPlayerOverlappingCollisionY()) {
+                playerCoords.y = playerCoords.y;
+            } else {
+                playerCoords.y += -getGravity() * deltatime;
+            }
             playerRectangle.y = playerCoords.y;
             movementDirection = MovementDirection.DOWN;
             /*jumpBlock = jumpDistance >= 0;*/
@@ -109,6 +175,34 @@ public class Player {
     //collision
     private static void updateCollisionRectangle(){
         collisionRectangle.setPosition(playerCoords.x, playerCoords.y);
+    }
+
+    private static boolean isPlayerOverlappingCollisionY() {
+        for (Rectangle collision : MapManager.getCollisionArray()) {
+            if (collisionRectangle.overlaps(collision)) {
+                if (collisionRectangle.y >= collision.y || collisionRectangle.y <= collision.y) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean isPlayerOverlappingCollisionX() {
+        for (Rectangle collision : MapManager.getCollisionArray()) {
+            if (collisionRectangle.overlaps(collision)) {
+                if (collisionRectangle.x >= collision.x || collisionRectangle.x <= collision.x) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void checkForCollision() {
+        for (Rectangle collison : MapManager.getCollisionArray()) {
+            // if (collisionRectangle.x <= collison.x ||)
+        }
     }
 
     public static void setPosition(float x, float y){
