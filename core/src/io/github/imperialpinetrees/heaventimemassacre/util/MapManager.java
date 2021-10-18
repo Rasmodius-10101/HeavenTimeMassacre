@@ -27,6 +27,9 @@ public class MapManager {
     //variables
     public static Vector2 mapDimensions;
     public static Vector2 playerStartPos;
+    public static Rectangle leftBounds;
+    public static Rectangle rightBounds;
+    public static Rectangle floorBounds;
 
     //Arrays
     private static Array<Rectangle> collisionArray;
@@ -63,9 +66,16 @@ public class MapManager {
     }
 
     private void getCollisionObjects() {
-        collisionArray = new Array<Rectangle>();
         for (MapObject e : tiledMap.getLayers().get("COLLISION").getObjects()) {
-            collisionArray.add(((RectangleMapObject)e).getRectangle());
+            if (e.getName().equalsIgnoreCase("Leftcollision")) {
+                leftBounds = new Rectangle(((RectangleMapObject)e).getRectangle().x , ((RectangleMapObject)e).getRectangle().y, ((RectangleMapObject)e).getRectangle().width, ((RectangleMapObject)e).getRectangle().height);
+            }
+            if (e.getName().equalsIgnoreCase("rightcollision")) {
+                rightBounds = new Rectangle(((RectangleMapObject)e).getRectangle().x , ((RectangleMapObject)e).getRectangle().y, ((RectangleMapObject)e).getRectangle().width, ((RectangleMapObject)e).getRectangle().height);
+            }
+            if (e.getName().equalsIgnoreCase("floorcollision")) {
+                floorBounds = new Rectangle(((RectangleMapObject)e).getRectangle().x , ((RectangleMapObject)e).getRectangle().y, ((RectangleMapObject)e).getRectangle().width, ((RectangleMapObject)e).getRectangle().height);
+            }
         }
     }
 
@@ -76,4 +86,17 @@ public class MapManager {
     public static Vector2 getMapDimensions() {
         return mapDimensions;
     }
+
+    public static Rectangle getLeftBounds() {
+        return leftBounds;
+    }
+
+    public static Rectangle getRightBounds() {
+        return rightBounds;
+    }
+
+    public static Rectangle getFloorBounds() {
+        return floorBounds;
+    }
+
 }

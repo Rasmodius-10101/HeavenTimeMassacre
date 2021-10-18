@@ -19,15 +19,16 @@ public class Player {
     private static TiledMapTileLayer layer = new TiledMapTileLayer(16,16, 16, 16);
 
 
+    private Vector2 speed;
     private Vector2 velocity;
     private static Vector2 playerCoords;
-    public static float gravity = 50;
+    public static float gravity = 10;
 
     private static int WIDTH = 16, HEIGHT = 16, tileWidth , tileHieght;
     private static boolean jumpBlock = false;
     private static float jumpDistance = 0;
     private final float MAX_JUMP = 10*HEIGHT;
-    private boolean rightCollisionX = false ,rightCollisionY = false ,leftCollisonX = false, leftCollisonY = false, upCollison = false, downCollision = false;
+    private static Vector2 oldPlayerCoords;
 
     private static final Rectangle collisionRectangle = new Rectangle(MapManager.playerStartPos.x, MapManager.playerStartPos.y,
             WIDTH, HEIGHT);
@@ -49,8 +50,7 @@ public class Player {
         MapManager.setPlayerSpawnLocation();
         playerCoords.set(MapManager.playerStartPos.x, MapManager.playerStartPos.y);
         playerRectangle = new Rectangle(playerCoords.x, playerCoords.y, WIDTH, HEIGHT);
-        velocity = new Vector2(100, 200);
-
+        velocity = new Vector2(5, 5);
     }
 
     public void playerUpdate(float deltatime){
@@ -70,7 +70,8 @@ public class Player {
     }
 
     public void getPlayerMovement(float deltaTime) {
-        for (Rectangle e : MapManager.getCollisionArray()) {
+        //good elevator mechanics
+        /*for (Rectangle e : MapManager.getCollisionArray()) {
             if (collisionRectangle.overlaps(e)) {
                 if (collisionRectangle.x >= e.x) {
                     playerCoords.y += 1;
@@ -78,8 +79,39 @@ public class Player {
                     playerCoords.x += 1;
                 }
             }
+        }*/
+
+        /*for (Rectangle e : MapManager.getCollisionArray()) {
+            oldPlayerCoords = playerCoords;
+
+            if (collisionRectangle.overlaps(e)) {
+                if (collisionRectangle.x >= e.x) {
+                    playerCoords.x += 1;
+                } */
+        /*else if (collisionRectangle.x >= e.x+e.width){
+                    playerCoords.x += 1;
+                }*/
+        /*
+                if (collisionRectangle.y >= e.y) {
+                    playerCoords.y += 1;
+                }
+            }
+        }*/
+
+        if (map.getLeftBounds().x + map.getLeftBounds().width >= playerCoords.x){
+            playerCoords.x += 10;
         }
+
+        if (map.getRightBounds().x  <= playerCoords.x + playerCoords.x){
+            playerCoords.x -= 10;
+        }
+
+        if (map.getFloorBounds().y  > playerCoords.y + playerRectangle.height){
+            playerCoords.y += 10;
+        }
+
         if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT)||Gdx.input.isKeyPressed(Input.Keys.D))) {
+
             playerCoords.x += velocity.x * deltaTime;
             playerRectangle.x = playerCoords.x;
             movementDirection = MovementDirection.RIGHT;
@@ -94,26 +126,19 @@ public class Player {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-            if (isPlayerOverlappingCollisionY()) {
-
-            } else {
                 playerCoords.y += velocity.y * deltaTime;
                 playerRectangle.y = playerCoords.y;
                 movementDirection = MovementDirection.UP;
                 jumpDistance += playerCoords.y;
                 jumpBlock = jumpDistance >= MAX_JUMP;
                 aimDirection = AimDirection.AIM_UP;
-            }
+
 
         }else {
-            if (isPlayerOverlappingCollisionY()) {
-                playerCoords.y = playerCoords.y;
-            } else {
-                playerCoords.y += -getGravity() * deltaTime;
-            }
+            playerCoords.y -= getGravity() * deltaTime;
             playerRectangle.y = playerCoords.y;
             movementDirection = MovementDirection.DOWN;
-            /*jumpBlock = jumpDistance >= 0;*/
+            jumpBlock = jumpDistance >= 0;
         }
 
     }

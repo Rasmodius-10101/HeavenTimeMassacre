@@ -33,14 +33,11 @@
 </data>
  </layer>
  <objectgroup id="3" name="SPAWN">
-  <object id="14" name="SPAWN" x="38.1023" y="209.264" width="15.5" height="17"/>
+  <object id="14" name="SPAWN" x="29.6153" y="210.036" width="15.5" height="17"/>
  </objectgroup>
  <objectgroup id="4" name="COLLISION">
-  <object id="34" name="COLLISION" x="0" y="239.883" width="287.539" height="16.8199"/>
-  <object id="35" name="COLLISION" x="159.789" y="176.208" width="112.132" height="15.6184"/>
-  <object id="36" name="COLLISION" x="16.0189" y="127.751" width="95.713" height="16.4194"/>
-  <object id="37" name="COLLISION" x="80.495" y="63.6752" width="111.331" height="16.0189"/>
-  <object id="40" name="COLLISION" x="271.921" y="4.40522" width="15.218" height="234.677"/>
-  <object id="41" name="COLLISION" x="-0.800946" y="4.80567" width="15.6184" height="234.677"/>
+  <object id="34" name="FLOORCOLLISION" x="0" y="239.883" width="287.539" height="16.8199"/>
+  <object id="40" name="RIGHTCOLLISION" x="271.921" y="4.40522" width="15.218" height="234.677"/>
+  <object id="41" name="LEFTCOLLISION" x="-0.800946" y="4.80567" width="15.6184" height="234.677"/>
  </objectgroup>
 </map>
