@@ -73,7 +73,7 @@ public class MapManager {
             if (e.getName().equalsIgnoreCase("rightcollision")) {
                 rightBounds = new Rectangle(((RectangleMapObject)e).getRectangle().x , ((RectangleMapObject)e).getRectangle().y, ((RectangleMapObject)e).getRectangle().width, ((RectangleMapObject)e).getRectangle().height);
             }
-            if (e.getName().equalsIgnoreCase("floorcollision")) {
+            if (e.getName().equalsIgnoreCase("FLOORCOLLISION")) {
                 floorBounds = new Rectangle(((RectangleMapObject)e).getRectangle().x , ((RectangleMapObject)e).getRectangle().y, ((RectangleMapObject)e).getRectangle().width, ((RectangleMapObject)e).getRectangle().height);
             }
         }

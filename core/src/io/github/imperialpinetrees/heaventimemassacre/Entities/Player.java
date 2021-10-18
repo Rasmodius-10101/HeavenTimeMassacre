@@ -22,7 +22,7 @@ public class Player {
     private Vector2 speed;
     private Vector2 velocity;
     private static Vector2 playerCoords;
-    public static float gravity = 10;
+    public static float gravity = 50;
 
     private static int WIDTH = 16, HEIGHT = 16, tileWidth , tileHieght;
     private static boolean jumpBlock = false;
@@ -50,7 +50,7 @@ public class Player {
         MapManager.setPlayerSpawnLocation();
         playerCoords.set(MapManager.playerStartPos.x, MapManager.playerStartPos.y);
         playerRectangle = new Rectangle(playerCoords.x, playerCoords.y, WIDTH, HEIGHT);
-        velocity = new Vector2(5, 5);
+        velocity = new Vector2(50, 50);
     }
 
     public void playerUpdate(float deltatime){
@@ -100,14 +100,17 @@ public class Player {
 
         if (map.getLeftBounds().x + map.getLeftBounds().width >= playerCoords.x){
             playerCoords.x += 10;
+            playerRectangle.x = playerCoords.x;
         }
 
-        if (map.getRightBounds().x  <= playerCoords.x + playerCoords.x){
+        if (map.getRightBounds().x  <= playerCoords.x + playerRectangle.x){
             playerCoords.x -= 10;
+            playerRectangle.x = playerCoords.x;
         }
 
-        if (map.getFloorBounds().y  > playerCoords.y + playerRectangle.height){
+        if (map.getFloorBounds().y  >= playerCoords.y + playerRectangle.height){
             playerCoords.y += 10;
+            playerRectangle.y = playerCoords.y;
         }
 
         if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT)||Gdx.input.isKeyPressed(Input.Keys.D))) {
