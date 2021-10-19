@@ -99,17 +99,23 @@ public class Player {
         }*/
 
         if (map.getLeftBounds().x + map.getLeftBounds().width >= playerCoords.x){
-            playerCoords.x += 10;
+            setPosition(MapManager.getLeftBounds().x + MapManager.getLeftBounds().width, playerCoords.y);
+            /*playerCoords.x += 1;*/
+            collisionRectangle.x = playerCoords.x;
             playerRectangle.x = playerCoords.x;
         }
 
-        if (map.getRightBounds().x  <= playerCoords.x + playerRectangle.x){
-            playerCoords.x -= 10;
+        if (map.getRightBounds().x  <= (playerRectangle.x + playerRectangle.width)){
+            setPosition(MapManager.getRightBounds().x- playerRectangle.width, playerCoords.y);
+            /*playerCoords.x -= 1;*/
+            collisionRectangle.x = playerCoords.x;
             playerRectangle.x = playerCoords.x;
         }
 
-        if (map.getFloorBounds().y  >= playerCoords.y + playerRectangle.height){
-            playerCoords.y += 10;
+        if (map.getFloorBounds().y  >= playerRectangle.y - playerRectangle.height ){
+            setPosition(playerCoords.x, MapManager.getFloorBounds().y + playerRectangle.height);
+            /*playerCoords.y += 1;*/
+            collisionRectangle.y = playerCoords.y;
             playerRectangle.y = playerCoords.y;
         }
 
