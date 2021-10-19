@@ -12,11 +12,9 @@ public class Player {
 
     private Rectangle playerRectangle;
 
-    private float x = 0;
-    private float y = 0;
 
-    private MapManager map = new MapManager();
-    private static TiledMapTileLayer layer = new TiledMapTileLayer(16,16, 16, 16);
+    private final MapManager map = new MapManager();
+    private static final TiledMapTileLayer layer = new TiledMapTileLayer(16,16, 16, 16);
 
 
     private Vector2 speed;
@@ -28,7 +26,6 @@ public class Player {
     private static boolean jumpBlock = false;
     private static float jumpDistance = 0;
     private final float MAX_JUMP = 10*HEIGHT;
-    private static Vector2 oldPlayerCoords;
 
     private static final Rectangle collisionRectangle = new Rectangle(MapManager.playerStartPos.x, MapManager.playerStartPos.y,
             WIDTH, HEIGHT);
