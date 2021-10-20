@@ -142,6 +142,11 @@ public class Player {
 
         }else {
             playerCoords.y -= getGravity() * deltaTime;
+            //so we need the code to check if the character is in the air before it applies gravity.
+            // we once we have a variable for that we can incorperate
+            // the gravity increasing based on how long the character has been in the air
+            // but also making sure it doesnt increase indefinately.
+            //this will stop it from pulling th character down even while its on the ground.
             playerRectangle.y = playerCoords.y;
             movementDirection = MovementDirection.DOWN;
             jumpBlock = jumpDistance >= 0;
