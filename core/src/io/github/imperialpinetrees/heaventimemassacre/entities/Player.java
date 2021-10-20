@@ -1,5 +1,5 @@
-package io.github.imperialpinetrees.heaventimemassacre.Entities;
-//                                                     ^typo?
+package io.github.imperialpinetrees.heaventimemassacre.entities;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
