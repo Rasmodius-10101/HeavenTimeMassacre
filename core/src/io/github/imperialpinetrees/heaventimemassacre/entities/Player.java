@@ -37,7 +37,6 @@ public class Player {
         AIM_LEFT, AIM_RIGHT, AIM_DOWN, AIM_UP
     }
 
-
     MovementDirection movementDirection;
     AimDirection aimDirection;
 
@@ -67,57 +66,25 @@ public class Player {
     }
 
     public void getPlayerMovement(float deltaTime) {
-        //good elevator mechanics
-        /*for (Rectangle e : MapManager.getCollisionArray()) {
-            if (collisionRectangle.overlaps(e)) {
-                if (collisionRectangle.x >= e.x) {
-                    playerCoords.y += 1;
-                } else if (collisionRectangle.y >= e.y) {
-                    playerCoords.x += 1;
-                }
-            }
-        }
-
-        for (Rectangle e : MapManager.getCollisionArray()) {
-            oldPlayerCoords = playerCoords;
-
-            if (collisionRectangle.overlaps(e)) {
-                if (collisionRectangle.x >= e.x) {
-                    playerCoords.x += 1;
-                }
-        else if (collisionRectangle.x >= e.x+e.width){
-                    playerCoords.x += 1;
-                }
-
-                if (collisionRectangle.y >= e.y) {
-                    playerCoords.y += 1;
-                }
-            }
-        }*/
-
         if (map.getLeftBounds().x + map.getLeftBounds().width >= playerCoords.x){
             setPosition(MapManager.getLeftBounds().x + MapManager.getLeftBounds().width, playerCoords.y);
-            /*playerCoords.x += 1;*/
             collisionRectangle.x = playerCoords.x;
             playerRectangle.x = playerCoords.x;
         }
 
         if (map.getRightBounds().x  <= (playerRectangle.x + playerRectangle.width)){
             setPosition(MapManager.getRightBounds().x- playerRectangle.width, playerCoords.y);
-            /*playerCoords.x -= 1;*/
             collisionRectangle.x = playerCoords.x;
             playerRectangle.x = playerCoords.x;
         }
 
         if (map.getFloorBounds().overlaps(collisionRectangle)) {
             setPosition(playerCoords.x, MapManager.getFloorBounds().y + playerRectangle.height);
-            /*playerCoords.y += 1;*/
             collisionRectangle.y = playerCoords.y;
             playerRectangle.y = playerCoords.y;
         }
 
         if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT)||Gdx.input.isKeyPressed(Input.Keys.D))) {
-
             playerCoords.x += velocity.x * deltaTime;
             playerRectangle.x = playerCoords.x;
             movementDirection = MovementDirection.RIGHT;
@@ -162,36 +129,6 @@ public class Player {
     private static void updateCollisionRectangle(){
         collisionRectangle.setPosition(playerCoords.x, playerCoords.y);
     }
-
-    /*
-    private static boolean isPlayerOverlappingCollisionY() {
-        for (Rectangle collision : MapManager.getCollisionArray()) {
-            if (collisionRectangle.overlaps(collision)) {
-                if (collisionRectangle.y >= collision.y || collisionRectangle.y <= collision.y) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private static boolean isPlayerOverlappingCollisionX() {
-        for (Rectangle collision : MapManager.getCollisionArray()) {
-            if (collisionRectangle.overlaps(collision)) {
-                if (collisionRectangle.x >= collision.x || collisionRectangle.x <= collision.x) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private void checkForCollision() {
-        for (Rectangle collison : MapManager.getCollisionArray()) {
-            // if (collisionRectangle.x <= collison.x ||)
-        }
-    }
-    */
 
     public static void setPosition(float x, float y){
         playerCoords.x = x;
