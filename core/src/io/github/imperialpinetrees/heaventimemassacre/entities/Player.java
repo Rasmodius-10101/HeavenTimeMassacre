@@ -147,6 +147,7 @@ public class Player {
             // the gravity increasing based on how long the character has been in the air
             // but also making sure it doesnt increase indefinately.
             //this will stop it from pulling th character down even while its on the ground.
+            //-------also is deltatime just the time since last render?--------
             playerRectangle.y = playerCoords.y;
             movementDirection = MovementDirection.DOWN;
             jumpBlock = jumpDistance >= 0;
