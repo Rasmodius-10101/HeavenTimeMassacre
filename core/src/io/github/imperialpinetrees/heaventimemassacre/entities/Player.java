@@ -27,6 +27,8 @@ public class Player {
     private static float jumpDistance = 0;
     private final float MAX_JUMP = 10*HEIGHT;
 
+    private Gun gun;
+
     private static final Rectangle collisionRectangle = new Rectangle(MapManager.playerStartPos.x, MapManager.playerStartPos.y,
             WIDTH, HEIGHT);
 
@@ -47,6 +49,7 @@ public class Player {
         playerCoords.set(MapManager.playerStartPos.x, MapManager.playerStartPos.y);
         playerRectangle = new Rectangle(playerCoords.x, playerCoords.y, WIDTH, HEIGHT);
         velocity = new Vector2(50, 50);
+        gun = new Gun();
     }
 
     public void playerUpdate(float deltatime){
@@ -56,6 +59,7 @@ public class Player {
 
     public void renderPlayer(ShapeRenderer shapeRenderer, float deltatime) {
         shapeRenderer.rect(playerRectangle.x, playerRectangle.y, playerRectangle.width, playerRectangle.height);
+        gun.renderGun(shapeRenderer);
         playerUpdate(deltatime);
     }
 
