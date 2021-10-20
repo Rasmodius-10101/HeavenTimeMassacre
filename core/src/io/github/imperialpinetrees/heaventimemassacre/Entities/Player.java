@@ -1,5 +1,5 @@
 package io.github.imperialpinetrees.heaventimemassacre.Entities;
-
+//                                                     ^typo?
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -143,11 +143,11 @@ public class Player {
         }else {
             playerCoords.y -= getGravity() * deltaTime;
             //so we need the code to check if the character is in the air before it applies gravity.
-            // we once we have a variable for that we can incorperate
+            //once we have a variable for that we can incorperate
             // the gravity increasing based on how long the character has been in the air
-            // but also making sure it doesnt increase indefinately.
+            // but also making sure it doesn't increase indefinately.
             //this will stop it from pulling th character down even while its on the ground.
-            //-------also is deltatime just the time since last render?--------
+            //-------also is delta time just the time since last render?--------
             playerRectangle.y = playerCoords.y;
             movementDirection = MovementDirection.DOWN;
             jumpBlock = jumpDistance >= 0;
