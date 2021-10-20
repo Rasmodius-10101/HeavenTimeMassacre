@@ -64,7 +64,10 @@ public class GameScreen implements Screen {
 
         shapeRenderer.setProjectionMatrix(camera.projection);
         shapeRenderer.setTransformMatrix(camera.view);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        /*for (Rectangle e : MapManager.getCollisionArray()) {
+            shapeRenderer.rect(e.x, e.y, e.width, e.height);
+        }*/
         player.renderPlayer(shapeRenderer, delta);
 
         map.renderMap(camera);
