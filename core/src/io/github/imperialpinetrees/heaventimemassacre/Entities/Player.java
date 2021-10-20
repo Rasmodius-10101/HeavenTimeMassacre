@@ -109,7 +109,7 @@ public class Player {
             playerRectangle.x = playerCoords.x;
         }
 
-        if (map.getFloorBounds().y  >= playerRectangle.y - playerRectangle.height ){
+        if (map.getFloorBounds().overlaps(collisionRectangle)) {
             setPosition(playerCoords.x, MapManager.getFloorBounds().y + playerRectangle.height);
             /*playerCoords.y += 1;*/
             collisionRectangle.y = playerCoords.y;

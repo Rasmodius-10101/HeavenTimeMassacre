@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="18" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="42">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="18" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="42">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="2" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -36,7 +36,7 @@
   <object id="14" name="SPAWN" x="29.6153" y="210.036" width="15.5" height="17"/>
  </objectgroup>
  <objectgroup id="4" name="COLLISION">
-  <object id="34" name="FLOORCOLLISION" x="0" y="239.883" width="287.539" height="16.8199"/>
+  <object id="34" name="FLOORCOLLISION" x="0.625" y="239.133" width="287.539" height="16.8199"/>
   <object id="40" name="RIGHTCOLLISION" x="272.017" y="-0.0210489" width="15.9878" height="239.719"/>
   <object id="41" name="LEFTCOLLISION" x="-0.800946" y="4.80567" width="15.6184" height="234.677"/>
  </objectgroup>
