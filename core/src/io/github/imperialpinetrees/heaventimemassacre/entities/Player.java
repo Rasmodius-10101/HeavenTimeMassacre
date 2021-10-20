@@ -141,7 +141,9 @@ public class Player {
 
 
         }else {
-            playerCoords.y -= getGravity() * deltaTime;
+            if (playerCoords.x >= MapManager.getFloorBounds().x) {
+                playerCoords.y -= getGravity() * deltaTime;
+            }
             //so we need the code to check if the character is in the air before it applies gravity.
             //once we have a variable for that we can incorperate
             // the gravity increasing based on how long the character has been in the air
