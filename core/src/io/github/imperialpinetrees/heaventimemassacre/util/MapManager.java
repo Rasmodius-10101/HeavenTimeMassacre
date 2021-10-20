@@ -8,7 +8,9 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 public class MapManager {
 
@@ -24,8 +26,12 @@ public class MapManager {
     //variables
     public static Vector2 mapDimensions;
     public static Vector2 playerStartPos;
+    public static Rectangle leftBounds;
+    public static Rectangle rightBounds;
+    public static Rectangle floorBounds;
 
     //Arrays
+    private static Array<Rectangle> collisionArray;
 
 
     //Other Classes
@@ -40,6 +46,7 @@ public class MapManager {
     public void loadMap(String mapName) { //TODO: Fix the method to make it safer in terms of errors
         tiledMap = new TmxMapLoader().load(mapName);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        getCollisionObjects();
     }
 
     public void renderMap(OrthographicCamera camera) {
@@ -55,22 +62,40 @@ public class MapManager {
                 ((RectangleMapObject)object).getRectangle().getPosition(playerStartPos);
             }
         }
-
     }
 
+    private void getCollisionObjects() {
+        for (MapObject e : tiledMap.getLayers().get("COLLISION").getObjects()) {
+            if (e.getName().equalsIgnoreCase("Leftcollision")) {
+                leftBounds = new Rectangle(((RectangleMapObject)e).getRectangle().x , ((RectangleMapObject)e).getRectangle().y, ((RectangleMapObject)e).getRectangle().width, ((RectangleMapObject)e).getRectangle().height);
+            }
+            if (e.getName().equalsIgnoreCase("rightcollision")) {
+                rightBounds = new Rectangle(((RectangleMapObject)e).getRectangle().x , ((RectangleMapObject)e).getRectangle().y, ((RectangleMapObject)e).getRectangle().width, ((RectangleMapObject)e).getRectangle().height);
+            }
+            if (e.getName().equalsIgnoreCase("FLOORCOLLISION")) {
+                floorBounds = new Rectangle(((RectangleMapObject)e).getRectangle().x , ((RectangleMapObject)e).getRectangle().y, ((RectangleMapObject)e).getRectangle().width, ((RectangleMapObject)e).getRectangle().height);
+            }
+        }
+    }
 
-
+    public static Array<Rectangle> getCollisionArray() {
+        return collisionArray;
+    }
 
     public static Vector2 getMapDimensions() {
         return mapDimensions;
     }
 
-    public static void setMapDimensions(Vector2 mapDimensions) {
-        MapManager.mapDimensions = mapDimensions;
+    public static Rectangle getLeftBounds() {
+        return leftBounds;
     }
 
+    public static Rectangle getRightBounds() {
+        return rightBounds;
+    }
 
-
-
+    public static Rectangle getFloorBounds() {
+        return floorBounds;
+    }
 
 }
