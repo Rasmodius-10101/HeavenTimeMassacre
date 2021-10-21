@@ -116,7 +116,11 @@ public class Player {
             // the gravity increasing based on how long the character has been in the air
             // but also making sure it doesn't increase indefinately.
             //this will stop it from pulling th character down even while its on the ground.
-            //-------also is delta time just the time since last render?--------  0_0 It's the time since last frame, so basically :)
+            //-------also is delta time just the time since last render?--------
+            // 0_0 It's the time since last frame, so basically :)
+            // okay so what i want to make the jump more fluid and satifying is we need the jump to set the velocity
+            // positive and have the gravity aceelerate down making the velocity progressivly negitive.
+            // we really need the air time variable in order to do that.
             playerRectangle.y = playerCoords.y;
             movementDirection = MovementDirection.DOWN;
             jumpBlock = jumpDistance >= 0;
