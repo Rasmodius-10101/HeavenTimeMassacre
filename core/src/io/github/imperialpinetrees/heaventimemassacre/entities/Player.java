@@ -191,6 +191,7 @@ public class Player {
     }
 
 }
+//lmao 
 // old stuff---
 //so we need the code to check if the character is in the air before it applies gravity. - i dont like how gravity changes when jump is released
 //once we have a variable for that we can incorperate
