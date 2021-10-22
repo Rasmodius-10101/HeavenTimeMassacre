@@ -39,7 +39,7 @@ public class Player {
         AIM_LEFT, AIM_RIGHT, AIM_DOWN, AIM_UP
     }
 
-    MovementDirection movementDirection;
+    private static MovementDirection movementDirection;
     AimDirection aimDirection;
 
 
@@ -67,6 +67,12 @@ public class Player {
         jumpBlock = false;
         jumpDistance = 16;
 
+    }
+
+    public void handleGun(ShapeRenderer shapeRenderer, float deltaTime) {
+        if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
+            gun.fireGun(shapeRenderer, deltaTime);
+        }
     }
 
     public void getPlayerMovement(float deltaTime) {
@@ -178,6 +184,10 @@ public class Player {
 
     public static float getGravity() {
         return gravity;
+    }
+
+    public static MovementDirection getCurrentDirection() {
+        return movementDirection;
     }
 
     //dispose

@@ -69,6 +69,7 @@ public class GameScreen implements Screen {
             shapeRenderer.rect(e.x, e.y, e.width, e.height);
         }*/
         player.renderPlayer(shapeRenderer, delta);
+        player.handleGun(shapeRenderer, delta);
 
         map.renderMap(camera);
         shapeRenderer.end();
