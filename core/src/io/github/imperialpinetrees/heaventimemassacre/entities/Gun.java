@@ -26,7 +26,7 @@ public class Gun { // POSSIBLE IDEA: Make this an abstract class and extend it i
 
     public Gun() {
         posOfGun = new Vector2(Player.getXPos() + 5, Player.getYPos() - 5); // Sets the position of the gun close to the player so it looks like the player is holding the gun
-        actualGun = new Rectangle(posOfGun.x, posOfGun.y, 16, 8);
+        actualGun = new Rectangle(posOfGun.x, posOfGun.y, 11, 8);
 
     }
 
