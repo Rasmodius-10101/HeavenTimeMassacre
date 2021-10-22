@@ -20,8 +20,7 @@ public class Player {
     private Vector2 speed;
     private Vector2 velocity;
     private static Vector2 playerCoords;
-    private double airTime = 0.00;// i need this to change as time passes while player is in the air
-    public static float gravity = 5;
+    public static float gravity = 50;
 
     private static int WIDTH = 16, HEIGHT = 16, tileWidth , tileHieght;
     private static boolean jumpBlock = false;
@@ -83,7 +82,6 @@ public class Player {
             setPosition(playerCoords.x, MapManager.getFloorBounds().y + playerRectangle.height);
             collisionRectangle.y = playerCoords.y;
             playerRectangle.y = playerCoords.y;
-            airTime = 0;
         }
 
         if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT)||Gdx.input.isKeyPressed(Input.Keys.D))) {
@@ -101,8 +99,7 @@ public class Player {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-                playerCoords.y += (velocity.y * deltaTime)-airTime ;
-                airTime+=.05;
+                playerCoords.y += (velocity.y * deltaTime);
                 playerRectangle.y = playerCoords.y;
                 movementDirection = MovementDirection.UP;
                 jumpDistance += playerCoords.y;
@@ -112,20 +109,9 @@ public class Player {
 
         }else {
             if (playerCoords.x >= MapManager.getFloorBounds().x) {
-                playerCoords.y -= getGravity() * deltaTime * airTime;
+                playerCoords.y -= getGravity() * deltaTime;
             }
 
-            airTime+=1;
-            //so we need the code to check if the character is in the air before it applies gravity.
-            //once we have a variable for that we can incorperate
-            // the gravity increasing based on how long the character has been in the air
-            // but also making sure it doesn't increase indefinately.
-            //this will stop it from pulling th character down even while its on the ground.
-            //-------also is delta time just the time since last render?--------
-            // 0_0 It's the time since last frame, so basically :)
-            // okay so what i want to make the jump more fluid and satifying is we need the jump to set the velocity
-            // positive and have the gravity aceelerate down making the velocity progressivly negitive.
-            // we really need the air time variable in order to do that.
             playerRectangle.y = playerCoords.y;
             movementDirection = MovementDirection.DOWN;
             jumpBlock = jumpDistance >= 0;
