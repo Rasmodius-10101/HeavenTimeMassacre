@@ -47,7 +47,7 @@ public class Player {
         MapManager.setPlayerSpawnLocation();
         playerCoords.set(MapManager.playerStartPos.x, MapManager.playerStartPos.y);
         playerRectangle = new Rectangle(playerCoords.x, playerCoords.y, WIDTH, HEIGHT);
-        velocity = new Vector2(50, 50);
+        velocity = new Vector2(50, 100);
     }
 
     public void playerUpdate(float deltatime){
@@ -101,7 +101,8 @@ public class Player {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-                playerCoords.y += velocity.y * deltaTime ;
+                playerCoords.y += (velocity.y * deltaTime)-airTime ;
+                airTime+=.05;
                 playerRectangle.y = playerCoords.y;
                 movementDirection = MovementDirection.UP;
                 jumpDistance += playerCoords.y;
