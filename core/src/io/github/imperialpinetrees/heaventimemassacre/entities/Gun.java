@@ -48,17 +48,17 @@ public class Gun { // POSSIBLE IDEA: Make this an abstract class and extend it i
             bullets.add(bullet);
 
             for (Rectangle e : bullets) {
-                switch (Player.getCurrentDirection()) {
-                    case UP:
+                switch (Player.getAimDirection()) {
+                    case AIM_UP:
                         e.y += velocityOfGun.y;
                         break;
-                    case DOWN:
+                    case AIM_DOWN:
                         e.y -= velocityOfGun.y;
                         break;
-                    case LEFT:
+                    case AIM_LEFT:
                         e.x -= velocityOfGun.x;
                         break;
-                    case RIGHT:
+                    case AIM_RIGHT:
                         e.x += velocityOfGun.x;
                         break;
                 }

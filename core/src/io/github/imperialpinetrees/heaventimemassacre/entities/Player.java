@@ -40,7 +40,7 @@ public class Player {
     }
 
     private static MovementDirection movementDirection;
-    AimDirection aimDirection;
+    private static AimDirection aimDirection;
 
 
     public Player() {
@@ -115,11 +115,10 @@ public class Player {
                 jumpDistance += playerCoords.y;
                 jumpBlock = jumpDistance >= MAX_JUMP;
                 aimDirection = AimDirection.AIM_UP;
-
-
         }else {
             if (playerCoords.x >= MapManager.getFloorBounds().x) {
                 playerCoords.y -= getGravity() * deltaTime;
+                movementDirection = MovementDirection.DOWN;
             }
             //so we need the code to check if the character is in the air before it applies gravity.
             //once we have a variable for that we can incorperate
@@ -128,7 +127,6 @@ public class Player {
             //this will stop it from pulling th character down even while its on the ground.
             //-------also is delta time just the time since last render?--------  0_0 It's the time since last frame, so basically :)
             playerRectangle.y = playerCoords.y;
-            movementDirection = MovementDirection.DOWN;
             jumpBlock = jumpDistance >= 0;
         }
 
@@ -188,6 +186,10 @@ public class Player {
 
     public static MovementDirection getCurrentDirection() {
         return movementDirection;
+    }
+
+    public static AimDirection getAimDirection() {
+        return aimDirection;
     }
 
     //dispose
