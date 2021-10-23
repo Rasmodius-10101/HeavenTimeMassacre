@@ -36,7 +36,7 @@ public class Gun { // POSSIBLE IDEA: Make this an abstract class and extend it i
 
     public void fireGun(ShapeRenderer shapeRenderer, float deltaTime) {
         Gdx.app.debug("Gun", "Gun fired");
-        float bulletTime = 5f;
+        float bulletTime = 0.1f;
         float timeSeconds = 0f;
 
         bullet = new Rectangle(posOfGun.x + 5, posOfGun.y, 8, 8);
@@ -45,22 +45,23 @@ public class Gun { // POSSIBLE IDEA: Make this an abstract class and extend it i
             // get rid of the bullet
             bullets.clear();
         } else {
-            switch (Player.getCurrentDirection()) {
-                case UP:
-                    bullet.y += velocityOfGun.y;
-                    break;
-                case DOWN:
-                    bullet.y -= velocityOfGun.y;
-                    break;
-                case LEFT:
-                    bullet.x -= velocityOfGun.x;
-                    break;
-                case RIGHT:
-                    bullet.x += velocityOfGun.x;
-                    break;
-            }
             bullets.add(bullet);
+
             for (Rectangle e : bullets) {
+                switch (Player.getCurrentDirection()) {
+                    case UP:
+                        e.y += velocityOfGun.y;
+                        break;
+                    case DOWN:
+                        e.y -= velocityOfGun.y;
+                        break;
+                    case LEFT:
+                        e.x -= velocityOfGun.x;
+                        break;
+                    case RIGHT:
+                        e.x += velocityOfGun.x;
+                        break;
+                }
                 shapeRenderer.rect(e.x, e.y, e.width, e.height);
             }
         }
