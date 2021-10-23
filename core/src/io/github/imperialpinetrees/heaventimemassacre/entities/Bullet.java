@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class Bullet {
 
     public boolean remove = false;
-    private final int speedOfBullet = 500;
+    private final int speedOfBullet = 200;
 
     public float x, y;
 

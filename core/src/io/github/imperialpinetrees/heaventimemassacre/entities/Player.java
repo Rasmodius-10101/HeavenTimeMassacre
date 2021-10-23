@@ -71,7 +71,7 @@ public class Player {
     }
 
     public void handleGun(ShapeRenderer shapeRenderer, float deltaTime) {
-        if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
             gun.fireGun(shapeRenderer, deltaTime);
         }
     }
