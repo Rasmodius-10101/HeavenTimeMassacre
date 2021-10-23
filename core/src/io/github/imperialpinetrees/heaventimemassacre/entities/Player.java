@@ -77,6 +77,10 @@ public class Player {
     }
 
     public void getPlayerMovement(float deltaTime) {
+        if (aimDirection == null) {
+            aimDirection = AimDirection.AIM_RIGHT;
+        }
+
         if (map.getLeftBounds().x + map.getLeftBounds().width >= playerCoords.x){
             setPosition(MapManager.getLeftBounds().x + MapManager.getLeftBounds().width, playerCoords.y);
             collisionRectangle.x = playerCoords.x;
