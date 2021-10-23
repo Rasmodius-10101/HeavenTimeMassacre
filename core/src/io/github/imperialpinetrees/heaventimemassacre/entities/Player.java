@@ -55,6 +55,7 @@ public class Player {
     public void playerUpdate(float deltatime){
         getPlayerMovement(deltatime);
         updateCollisionRectangle();
+        gun.updateGun(deltatime);
     }
 
     public void renderPlayer(ShapeRenderer shapeRenderer, float deltatime) {

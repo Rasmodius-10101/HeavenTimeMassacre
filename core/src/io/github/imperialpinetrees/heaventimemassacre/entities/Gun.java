@@ -7,10 +7,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.ArrayList;
+
 public class Gun { // POSSIBLE IDEA: Make this an abstract class and extend it in multiple gun classes, just an idea, may not work in the future though
 
     private Rectangle bullet; // The bullet object is just a rectangle (possibly circle in the future) that has logic for a bullet (possibly)
-    private Array<Rectangle> bullets; // Array that stores all the bullets
+    private ArrayList<Bullet> bullets; // Array that stores all the bullets
 
     private Rectangle actualGun; // Couldn't think of an actual name for it but it's the square that is next to the player
 
@@ -31,41 +33,23 @@ public class Gun { // POSSIBLE IDEA: Make this an abstract class and extend it i
         posOfGun = new Vector2(Player.getXPos() + 5, Player.getYPos() - 5); // Sets the position of the gun close to the player so it looks like the player is holding the gun
         actualGun = new Rectangle(posOfGun.x, posOfGun.y, 11, 8);
         velocityOfGun = new Vector2(10, 10);
-        bullets = new Array<Rectangle>();
+        bullets = new ArrayList<Bullet>();
     }
 
     public void fireGun(ShapeRenderer shapeRenderer, float deltaTime) {
         Gdx.app.debug("Gun", "Gun fired");
-        float bulletTime = 0.1f;
-        float timeSeconds = 0f;
+        bullets.add(new Bullet(Player.getXPos(), Player.getYPos()));
+    }
 
-        bullet = new Rectangle(posOfGun.x + 5, posOfGun.y, 8, 8);
-        timeSeconds += deltaTime;
-        if (timeSeconds > bulletTime) {
-            // get rid of the bullet
-            bullets.clear();
-        } else {
-            bullets.add(bullet);
-
-            for (Rectangle e : bullets) {
-                switch (Player.getAimDirection()) {
-                    case AIM_UP:
-                        e.y += velocityOfGun.y;
-                        break;
-                    case AIM_DOWN:
-                        e.y -= velocityOfGun.y;
-                        break;
-                    case AIM_LEFT:
-                        e.x -= velocityOfGun.x;
-                        break;
-                    case AIM_RIGHT:
-                        e.x += velocityOfGun.x;
-                        break;
-                }
-                shapeRenderer.rect(e.x, e.y, e.width, e.height);
+    public void updateGun(float deltaTime) {
+        ArrayList<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+        for (Bullet bullet : bullets) {
+            bullet.update(deltaTime);
+            if (bullet.remove) {
+                bulletsToRemove.add(bullet);
             }
+            bullets.removeAll(bulletsToRemove);
         }
-
     }
 
     public void renderGun(ShapeRenderer shapeRenderer) {
@@ -76,5 +60,9 @@ public class Gun { // POSSIBLE IDEA: Make this an abstract class and extend it i
         actualGun.y = posOfGun.y;
 
         shapeRenderer.rect(actualGun.x, actualGun.y, actualGun.width, actualGun.height);
+
+        for (Bullet bullet : bullets) {
+            bullet.render(shapeRenderer);
+        }
     }
 }
