@@ -47,7 +47,7 @@ public class Player {
         MapManager.setPlayerSpawnLocation();
         playerCoords.set(MapManager.playerStartPos.x, MapManager.playerStartPos.y);
         playerRectangle = new Rectangle(playerCoords.x, playerCoords.y, WIDTH, HEIGHT);
-        velocity = new Vector2(100, 50);
+        velocity = new Vector2(100, 100);
     }
 
     public void playerUpdate(float deltatime){
@@ -68,8 +68,8 @@ public class Player {
 
     public void getPlayerMovement(float deltaTime) {
 //------------------------------------------------------------------------------------------------------book mark
-        double yMotion=  (velocity.y * deltaTime)-(gravity*airTime);
-
+        double yMotion=  (velocity.y * deltaTime/2)-(gravity*airTime);
+                        //(velocity.y* deltaTime/2)-(gravity*airTime)
         applyGravity(deltaTime);
 
         if (map.getLeftBounds().x + map.getLeftBounds().width >= playerCoords.x){
@@ -107,7 +107,6 @@ public class Player {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-            //while (jumpBlock) [prob not]
                 if (!jumpBlock)
                     velocity.y=500;
                 jumpBlock = true;
@@ -131,7 +130,7 @@ public class Player {
     // i would ike to apply the remnants of the velocity to still exist, so it eases into a fall.
     public void applyGravity(float deltaTime) {
         if (playerCoords.x >= MapManager.getFloorBounds().x) {
-            playerCoords.y += (velocity.y* deltaTime/3)-(gravity*airTime);
+            playerCoords.y += (velocity.y* deltaTime/2)-(gravity*airTime);
         }
     }
 
