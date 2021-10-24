@@ -1,5 +1,6 @@
 package io.github.imperialpinetrees.heaventimemassacre.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Bullet {
@@ -15,8 +16,10 @@ public class Bullet {
     }
 
     public void update(float deltaTime) {
-        float bulletTime = 1f;
-        float timeSeconds = 0f;
+        remove = false;
+
+        float bulletTime = 1.0178f;
+        float timeSeconds = 0;
 
         switch (Player.getAimDirection())  {
             case AIM_UP:
@@ -33,10 +36,12 @@ public class Bullet {
                 break;
         }
 
-        timeSeconds += deltaTime;
+        timeSeconds += deltaTime + 1;
 
-        if (bulletTime < timeSeconds) {
+        Gdx.app.log("Gun", String.valueOf(timeSeconds));
+        if (timeSeconds > bulletTime) {
             remove = true;
+            timeSeconds = 0;
         }
 
     }

@@ -48,8 +48,8 @@ public class Gun { // POSSIBLE IDEA: Make this an abstract class and extend it i
             if (bullet.remove) {
                 bulletsToRemove.add(bullet);
             }
-            bullets.removeAll(bulletsToRemove);
         }
+        bullets.removeAll(bulletsToRemove);
     }
 
     public void renderGun(ShapeRenderer shapeRenderer) {
