@@ -39,9 +39,9 @@ public class Bullet {
         timeSeconds += deltaTime + 1;
 
         Gdx.app.log("Gun", String.valueOf(timeSeconds));
-        if (timeSeconds > bulletTime) {
+        if (x > Gdx.graphics.getWidth() || x < -Gdx.graphics.getWidth() || y > Gdx.graphics.getHeight() || y < -Gdx.graphics.getHeight()) {
             remove = true;
-            timeSeconds = 0;
+            Gdx.app.log("Bullet", "Removed bullet");
         }
 
     }
