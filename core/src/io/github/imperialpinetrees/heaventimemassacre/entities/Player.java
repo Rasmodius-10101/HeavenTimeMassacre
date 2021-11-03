@@ -55,7 +55,9 @@ public class Player {
     public void playerUpdate(float deltatime){
         getPlayerMovement(deltatime);
         updateCollisionRectangle();
+        controlAimDirection();
         gun.updateGun(deltatime);
+
     }
 
     public void renderPlayer(ShapeRenderer shapeRenderer, float deltatime) {
@@ -71,7 +73,7 @@ public class Player {
     }
 
     public void handleGun(ShapeRenderer shapeRenderer, float deltaTime) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             gun.fireGun(shapeRenderer, deltaTime);
         }
     }
@@ -99,18 +101,16 @@ public class Player {
             playerRectangle.y = playerCoords.y;
         }
 
-        if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT)||Gdx.input.isKeyPressed(Input.Keys.D))) {
+        if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT))) {
             playerCoords.x += velocity.x * deltaTime;
             playerRectangle.x = playerCoords.x;
             movementDirection = MovementDirection.RIGHT;
-            aimDirection = AimDirection.AIM_RIGHT;
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)||Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             playerCoords.x -= velocity.x * deltaTime;
             playerRectangle.x = playerCoords.x;
             movementDirection = MovementDirection.LEFT;
-            aimDirection = AimDirection.AIM_LEFT;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)){
@@ -119,7 +119,6 @@ public class Player {
                 movementDirection = MovementDirection.UP;
                 jumpDistance += playerCoords.y;
                 jumpBlock = jumpDistance >= MAX_JUMP;
-                aimDirection = AimDirection.AIM_UP;
         }else {
             if (playerCoords.x >= MapManager.getFloorBounds().x) {
                 playerCoords.y -= getGravity() * deltaTime;
@@ -133,6 +132,20 @@ public class Player {
             //-------also is delta time just the time since last render?--------  0_0 It's the time since last frame, so basically :)
             playerRectangle.y = playerCoords.y;
             jumpBlock = jumpDistance >= 0;
+        }
+
+    }
+
+    public void controlAimDirection(){
+
+        if ((Gdx.input.isKeyPressed(Input.Keys.D))) {
+            aimDirection = AimDirection.AIM_RIGHT;
+        }
+        if ((Gdx.input.isKeyPressed(Input.Keys.A))) {
+            aimDirection = AimDirection.AIM_LEFT;
+        }
+        if ((Gdx.input.isKeyPressed(Input.Keys.W))) {
+            aimDirection = AimDirection.AIM_UP;
         }
 
     }
